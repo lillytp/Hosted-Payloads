@@ -1,0 +1,3 @@
+## 2026-06-06 - [Ticker DOM Update Optimization]
+**Learning:** Frequent use of `innerHTML` for high-frequency UI updates (like tickers or timers) leads to unnecessary DOM re-parsing and layout overhead. Pre-caching DOM element references and using `textContent` is significantly more efficient. Pre-instantiating `Intl.NumberFormat` also avoids repeated constructor overhead and provides cleaner localization.
+**Action:** Always cache DOM elements for repetitive updates. Prefer `textContent` over `innerHTML` when only text content changes. Move expensive constructors (like `Intl` formatters) outside of intervals.
