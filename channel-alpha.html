@@ -1,0 +1,1410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Channel Alpha — Creator Intelligence Platform</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+  :root {
+    --bg-base:    #070b14;
+    --bg-card:    #0d1424;
+    --bg-panel:   #111d30;
+    --border:     #1a2d45;
+    --border-dim: #142035;
+    --blue:       #00c8ff;
+    --blue-dim:   #0084aa;
+    --green:      #00f5a0;
+    --green-dim:  #009960;
+    --orange:     #ff7c3a;
+    --red:        #ff4e6a;
+    --purple:     #a78bfa;
+    --text-1:     #e2eaf6;
+    --text-2:     #7a96b8;
+    --text-3:     #3d5672;
+    --mono:       'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+    --sans:       'Inter', system-ui, sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--bg-base);
+    color: var(--text-1);
+    height: 100vh;
+    display: grid;
+    grid-template-rows: 48px 1fr;
+    grid-template-columns: 56px 220px 1fr 300px;
+    overflow: hidden;
+  }
+
+  /* ─── TOPBAR ─────────────────────────────────── */
+  .topbar {
+    grid-column: 1 / -1;
+    background: var(--bg-card);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    padding: 0 16px;
+    gap: 16px;
+    z-index: 100;
+  }
+
+  .logo {
+    font-family: var(--mono);
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--blue);
+    letter-spacing: -0.5px;
+    white-space: nowrap;
+  }
+  .logo span { color: var(--green); }
+
+  .ticker-strip {
+    flex: 1;
+    overflow: hidden;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-2);
+    display: flex;
+    gap: 24px;
+    contain: content;
+  }
+  .tick { display: flex; gap: 6px; align-items: center; }
+  .tick-label { color: var(--text-3); }
+  .tick-val { color: var(--text-1); }
+  .up { color: var(--green); }
+  .dn { color: var(--red); }
+
+  .topbar-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-left: auto;
+  }
+  .badge {
+    background: var(--blue);
+    color: #000;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 10px;
+    font-family: var(--mono);
+  }
+  .badge.green { background: var(--green); }
+  .badge.orange { background: var(--orange); }
+
+  .avatar {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--blue), var(--purple));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 700; color: #fff;
+    cursor: pointer;
+  }
+
+  /* ─── ICON NAV ───────────────────────────────── */
+  .icon-nav {
+    background: var(--bg-card);
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 12px 0;
+    gap: 6px;
+  }
+  .nav-icon {
+    width: 38px; height: 38px;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 17px;
+    color: var(--text-3);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .nav-icon:hover { background: var(--bg-panel); color: var(--text-1); }
+  .nav-icon.active { background: var(--blue); color: #000; }
+
+  /* ─── LEFT NAV ───────────────────────────────── */
+  .left-nav {
+    background: var(--bg-card);
+    border-right: 1px solid var(--border);
+    padding: 16px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    overflow-y: auto;
+  }
+  .nav-section-label {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    color: var(--text-3);
+    text-transform: uppercase;
+    padding: 12px 8px 6px;
+  }
+  .nav-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 10px;
+    border-radius: 8px;
+    font-size: 13px;
+    color: var(--text-2);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .nav-item:hover { background: var(--bg-panel); color: var(--text-1); }
+  .nav-item.active { background: rgba(0,200,255,0.12); color: var(--blue); }
+  .nav-item .icon { font-size: 15px; width: 20px; text-align: center; }
+  .nav-item .pill {
+    margin-left: auto;
+    background: var(--orange);
+    color: #000;
+    font-size: 9px;
+    font-weight: 700;
+    padding: 1px 6px;
+    border-radius: 8px;
+  }
+  .nav-item .pill.blue { background: var(--blue); }
+
+  /* ─── MAIN AREA ──────────────────────────────── */
+  .main {
+    overflow-y: auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--border) transparent;
+  }
+
+  /* ─── MORNING BRIEF ──────────────────────────── */
+  .morning-brief {
+    background: linear-gradient(135deg, #0a1628 0%, #091420 100%);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  .morning-brief::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--blue), var(--green), var(--purple));
+  }
+  .brief-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+  }
+  .brief-title {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    color: var(--blue);
+    text-transform: uppercase;
+  }
+  .brief-time {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-3);
+  }
+  .brief-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+  .brief-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-dim);
+    border-radius: 10px;
+    padding: 14px;
+    cursor: pointer;
+    transition: border-color 0.2s;
+  }
+  .brief-card:hover { border-color: var(--blue); }
+  .brief-card-label {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: var(--text-3);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .brief-card-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-1);
+    line-height: 1.4;
+    margin-bottom: 8px;
+  }
+  .score-bar {
+    height: 3px;
+    background: var(--border);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .score-fill {
+    height: 100%;
+    border-radius: 2px;
+    background: linear-gradient(90deg, var(--blue), var(--green));
+  }
+  .score-label {
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--text-3);
+    margin-top: 6px;
+  }
+  .score-label span { color: var(--green); font-weight: 700; }
+
+  /* ─── GRID 2-COL ─────────────────────────────── */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+
+  /* ─── CARD ───────────────────────────────────── */
+  .card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 18px;
+    contain: content;
+  }
+  .card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+  }
+  .card-title {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    color: var(--text-2);
+    text-transform: uppercase;
+  }
+  .card-action {
+    font-size: 11px;
+    color: var(--blue);
+    cursor: pointer;
+    opacity: 0.7;
+  }
+  .card-action:hover { opacity: 1; }
+
+  /* ─── METRIC ─────────────────────────────────── */
+  .metric { display: flex; flex-direction: column; gap: 4px; }
+  .metric-val {
+    font-family: var(--mono);
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--text-1);
+    letter-spacing: -1px;
+  }
+  .metric-label { font-size: 11px; color: var(--text-3); }
+  .metric-delta {
+    font-family: var(--mono);
+    font-size: 11px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .metric-delta.up { color: var(--green); }
+  .metric-delta.dn { color: var(--red); }
+
+  /* ─── CHART WRAPPER ──────────────────────────── */
+  .chart-wrap { position: relative; height: 140px; }
+
+  /* ─── VIDEO TABLE ─────────────────────────────── */
+  .video-list { display: flex; flex-direction: column; gap: 10px; }
+  .video-row {
+    display: grid;
+    grid-template-columns: 70px 1fr 80px 70px 60px;
+    align-items: center;
+    gap: 12px;
+    padding: 10px;
+    border-radius: 9px;
+    border: 1px solid var(--border-dim);
+    transition: border-color 0.2s;
+    cursor: pointer;
+  }
+  .video-row:hover { border-color: var(--blue); background: rgba(0,200,255,0.03); }
+  .thumb {
+    width: 70px; height: 40px;
+    border-radius: 6px;
+    background: var(--bg-panel);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+    overflow: hidden;
+    position: relative;
+  }
+  .thumb-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, #1a2d45, #0d1e30);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: 800;
+    color: var(--blue);
+    font-family: var(--mono);
+  }
+  .video-title-cell { font-size: 12px; font-weight: 600; color: var(--text-1); line-height: 1.35; }
+  .video-sub { font-size: 10px; color: var(--text-3); margin-top: 3px; }
+  .mono-cell {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--text-2);
+    text-align: right;
+  }
+  .retention-bar {
+    height: 4px;
+    background: var(--border);
+    border-radius: 2px;
+    overflow: hidden;
+    margin-top: 4px;
+  }
+  .retention-fill { height: 100%; border-radius: 2px; }
+
+  /* ─── TREND ITEMS ────────────────────────────── */
+  .trend-list { display: flex; flex-direction: column; gap: 8px; }
+  .trend-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 12px;
+    border-radius: 9px;
+    border: 1px solid var(--border-dim);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .trend-item:hover { border-color: var(--green); background: rgba(0,245,160,0.03); }
+  .trend-rank {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-3);
+    width: 16px;
+    text-align: center;
+    flex-shrink: 0;
+  }
+  .trend-topic { font-size: 12px; font-weight: 600; color: var(--text-1); flex: 1; }
+  .trend-sub { font-size: 10px; color: var(--text-3); margin-top: 2px; }
+  .trend-score {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--green);
+    flex-shrink: 0;
+  }
+  .fire { font-size: 14px; }
+
+  /* ─── REVENUE METRICS ────────────────────────── */
+  .rev-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .rev-cell {
+    padding: 12px;
+    background: var(--bg-panel);
+    border-radius: 9px;
+    border: 1px solid var(--border-dim);
+  }
+  .rev-label { font-size: 10px; color: var(--text-3); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .rev-val {
+    font-family: var(--mono);
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text-1);
+  }
+  .rev-delta {
+    font-family: var(--mono);
+    font-size: 10px;
+    margin-top: 3px;
+  }
+
+  /* ─── PIPELINE ───────────────────────────────── */
+  .pipeline { display: flex; flex-direction: column; gap: 8px; }
+  .deal {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    border-radius: 9px;
+    border: 1px solid var(--border-dim);
+  }
+  .deal-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .deal-name { font-size: 12px; font-weight: 600; color: var(--text-1); flex: 1; }
+  .deal-stage { font-size: 10px; color: var(--text-3); }
+  .deal-val {
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--text-2);
+  }
+
+  /* ─── CALENDAR ───────────────────────────────── */
+  .cal-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+  }
+  .cal-day-header {
+    font-size: 9px;
+    font-weight: 700;
+    color: var(--text-3);
+    text-align: center;
+    padding: 4px 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .cal-day {
+    aspect-ratio: 1;
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--text-3);
+    border: 1px solid transparent;
+    cursor: pointer;
+    gap: 2px;
+    transition: all 0.15s;
+  }
+  .cal-day:hover { border-color: var(--border); color: var(--text-1); }
+  .cal-day.today { border-color: var(--blue); color: var(--blue); background: rgba(0,200,255,0.08); }
+  .cal-day.has-post { background: rgba(0,245,160,0.1); border-color: var(--green-dim); color: var(--green); }
+  .cal-day.scheduled { background: rgba(167,139,250,0.1); border-color: #6d5fd0; color: var(--purple); }
+  .cal-day .dot { width: 4px; height: 4px; border-radius: 50%; }
+
+  /* ─── RIGHT SIDEBAR ──────────────────────────── */
+  .right-sidebar {
+    border-left: 1px solid var(--border);
+    background: var(--bg-card);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  .sidebar-section {
+    border-bottom: 1px solid var(--border);
+    padding: 16px;
+    flex-shrink: 0;
+  }
+  .sidebar-title {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    color: var(--text-3);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .live-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--red);
+    animation: pulse 1.5s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  /* ─── MARKET WIDGET ──────────────────────────── */
+  .market-list { display: flex; flex-direction: column; gap: 6px; }
+  .market-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 6px 8px;
+    border-radius: 7px;
+    border: 1px solid var(--border-dim);
+  }
+  .market-name { font-size: 11px; font-weight: 700; color: var(--text-1); }
+  .market-sub { font-size: 9px; color: var(--text-3); }
+  .market-price {
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 700;
+    text-align: right;
+  }
+  .market-chg { font-family: var(--mono); font-size: 10px; text-align: right; }
+
+  /* ─── NEWS FEED ──────────────────────────────── */
+  .news-feed { flex: 1; overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 8px; scrollbar-width: thin; scrollbar-color: var(--border) transparent; }
+  .news-item {
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid var(--border-dim);
+    cursor: pointer;
+    transition: border-color 0.15s;
+  }
+  .news-item:hover { border-color: var(--blue); }
+  .news-tag {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+  }
+  .news-headline { font-size: 11px; font-weight: 600; color: var(--text-1); line-height: 1.4; }
+  .news-meta { font-size: 9px; color: var(--text-3); margin-top: 5px; }
+  .news-score {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    background: rgba(0,245,160,0.12);
+    color: var(--green);
+    font-family: var(--mono);
+    font-size: 9px;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 4px;
+    margin-top: 5px;
+  }
+
+  /* ─── ALGO GUARD ─────────────────────────────── */
+  .guard-item {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    padding: 8px 10px;
+    border-radius: 8px;
+    border: 1px solid;
+    margin-bottom: 8px;
+    font-size: 11px;
+    line-height: 1.4;
+  }
+  .guard-item.warn { border-color: #5a3200; background: rgba(255,124,58,0.07); color: var(--orange); }
+  .guard-item.ok { border-color: #003d25; background: rgba(0,245,160,0.07); color: var(--green); }
+  .guard-item .icon { font-size: 14px; flex-shrink: 0; margin-top: 1px; }
+
+  /* ─── TABS ───────────────────────────────────── */
+  .tabs { display: flex; gap: 2px; margin-bottom: 16px; }
+  .tab {
+    padding: 6px 14px;
+    border-radius: 7px;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-3);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .tab.active { background: rgba(0,200,255,0.12); color: var(--blue); }
+  .tab:hover:not(.active) { color: var(--text-2); }
+
+  /* ─── HOOK SCORE ─────────────────────────────── */
+  .hook-list { display: flex; flex-direction: column; gap: 8px; }
+  .hook-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 12px;
+    border-radius: 9px;
+    border: 1px solid var(--border-dim);
+    cursor: pointer;
+    transition: border-color 0.15s;
+  }
+  .hook-row:hover { border-color: var(--blue); }
+  .hook-row .hook-text { font-size: 12px; color: var(--text-1); flex: 1; line-height: 1.35; }
+  .hook-ctr {
+    font-family: var(--mono);
+    font-size: 13px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .hook-bar {
+    width: 60px;
+    height: 4px;
+    background: var(--border);
+    border-radius: 2px;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  .hook-fill { height: 100%; border-radius: 2px; background: linear-gradient(90deg, var(--blue), var(--green)); }
+
+  /* ─── SCROLLBAR ──────────────────────────────── */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+  /* ─── ANIMATIONS ─────────────────────────────── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .card, .morning-brief { animation: fadeUp 0.3s ease both; }
+</style>
+</head>
+<body>
+
+<!-- ═══ TOPBAR ═══════════════════════════════════════════════════════ -->
+<header class="topbar">
+  <div class="logo">Channel<span>Alpha</span></div>
+  <div class="ticker-strip">
+    <div class="tick"><span class="tick-label">SPY</span><span class="tick-val">$591.42</span><span class="up">+1.2%</span></div>
+    <div class="tick"><span class="tick-label">QQQ</span><span class="tick-val">$512.88</span><span class="up">+1.8%</span></div>
+    <div class="tick"><span class="tick-label">BTC</span><span class="tick-val">$107,340</span><span class="up">+2.4%</span></div>
+    <div class="tick"><span class="tick-label">ETH</span><span class="tick-val">$3,918</span><span class="dn">-0.6%</span></div>
+    <div class="tick"><span class="tick-label">NVDA</span><span class="tick-val">$1,089</span><span class="up">+3.1%</span></div>
+    <div class="tick"><span class="tick-label">10Y</span><span class="tick-val">4.32%</span><span class="dn">-2bp</span></div>
+    <div class="tick"><span class="tick-label">VIX</span><span class="tick-val">14.8</span><span class="dn">-0.9</span></div>
+    <div class="tick"><span class="tick-label">DXY</span><span class="tick-val">104.21</span><span class="dn">-0.3%</span></div>
+  </div>
+  <div class="topbar-right">
+    <span class="badge green">LIVE</span>
+    <span class="badge">PRO</span>
+    <span style="font-size:11px;color:var(--text-2)">tlillyusmc</span>
+    <div class="avatar">TL</div>
+  </div>
+</header>
+
+<!-- ═══ ICON NAV ══════════════════════════════════════════════════════ -->
+<nav class="icon-nav">
+  <div class="nav-icon active" title="Dashboard">⌂</div>
+  <div class="nav-icon" title="Script Studio">✍</div>
+  <div class="nav-icon" title="Thumbnail Lab">🖼</div>
+  <div class="nav-icon" title="Analytics">📈</div>
+  <div class="nav-icon" title="Revenue">💰</div>
+  <div class="nav-icon" title="Trends">🔥</div>
+  <div style="flex:1"></div>
+  <div class="nav-icon" title="Settings">⚙</div>
+</nav>
+
+<!-- ═══ LEFT NAV ══════════════════════════════════════════════════════ -->
+<aside class="left-nav">
+  <div class="nav-section-label">Workspace</div>
+  <div class="nav-item active"><span class="icon">⌂</span> Morning Brief</div>
+  <div class="nav-item"><span class="icon">✍</span> Script Studio</div>
+  <div class="nav-item"><span class="icon">📅</span> Content Calendar</div>
+  <div class="nav-item"><span class="icon">🖼</span> Thumbnail Lab <span class="pill">A/B</span></div>
+
+  <div class="nav-section-label">Intelligence</div>
+  <div class="nav-item"><span class="icon">🔥</span> Trend Radar</div>
+  <div class="nav-item"><span class="icon">🔍</span> Keyword Research</div>
+  <div class="nav-item"><span class="icon">🏆</span> Competitor Intel</div>
+  <div class="nav-item"><span class="icon">💬</span> Audience Pulse <span class="pill blue">12</span></div>
+
+  <div class="nav-section-label">Revenue</div>
+  <div class="nav-item"><span class="icon">💰</span> Revenue Desk</div>
+  <div class="nav-item"><span class="icon">🤝</span> Sponsorship CRM</div>
+  <div class="nav-item"><span class="icon">📊</span> Forecast Model</div>
+  <div class="nav-item"><span class="icon">🔗</span> Affiliate Tracker</div>
+
+  <div class="nav-section-label">Tools</div>
+  <div class="nav-item"><span class="icon">🛡</span> Compliance Guard</div>
+  <div class="nav-item"><span class="icon">✂</span> Clip Extractor</div>
+  <div class="nav-item"><span class="icon">🎯</span> Hook Optimizer</div>
+</aside>
+
+<!-- ═══ MAIN ══════════════════════════════════════════════════════════ -->
+<main class="main">
+
+  <!-- MORNING BRIEF -->
+  <div class="morning-brief">
+    <div class="brief-header">
+      <div class="brief-title">⚡ 10-Minute Morning Brief</div>
+      <div class="brief-time" id="clock">Wed Jun 04, 2026 — 09:31 AM</div>
+    </div>
+    <div class="brief-grid">
+      <div class="brief-card">
+        <div class="brief-card-label">🔥 Top Trend</div>
+        <div class="brief-card-title">Claude 4 Opus beats GPT-5 on finance benchmarks — reaction void</div>
+        <div class="score-bar"><div class="score-fill" style="width:91%"></div></div>
+        <div class="score-label"><span>91 / 100</span><span>Search ↑ 340% (6h)</span></div>
+      </div>
+      <div class="brief-card">
+        <div class="brief-card-label">💡 Keyword Opportunity</div>
+        <div class="brief-card-title">"AI dividend investing 2026" — high RPM, low competition gap</div>
+        <div class="score-bar"><div class="score-fill" style="width:78%; background: linear-gradient(90deg, #a78bfa, #00c8ff)"></div></div>
+        <div class="score-label"><span>78 / 100</span><span>Est. RPM $24–$31</span></div>
+      </div>
+      <div class="brief-card">
+        <div class="brief-card-label">📅 Best Upload Window</div>
+        <div class="brief-card-title">Your audience peaks <strong style="color:var(--green)">today 6–8 PM EST</strong>. Schedule now to hit the wave.</div>
+        <div class="score-bar"><div class="score-fill" style="width:85%; background: linear-gradient(90deg, var(--green), #00c8ff)"></div></div>
+        <div class="score-label"><span>+34% avg views</span><span>vs. off-peak</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- METRICS ROW -->
+  <div class="three-col">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">Monthly Revenue</div>
+        <div class="card-action">Full report →</div>
+      </div>
+      <div class="metric">
+        <div class="metric-val">$18,340</div>
+        <div class="metric-label">June MTD · All sources</div>
+        <div class="metric-delta up">▲ +22.4% vs May</div>
+      </div>
+      <div class="chart-wrap" style="margin-top:12px">
+        <canvas id="revenueChart"></canvas>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">Channel Growth</div>
+        <div class="card-action">Breakdown →</div>
+      </div>
+      <div class="metric">
+        <div class="metric-val">128.4K</div>
+        <div class="metric-label">Subscribers · +2,840 this week</div>
+        <div class="metric-delta up">▲ +8.1% MoM</div>
+      </div>
+      <div class="chart-wrap" style="margin-top:12px">
+        <canvas id="subChart"></canvas>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">Avg View Retention</div>
+        <div class="card-action">Heatmap →</div>
+      </div>
+      <div class="metric">
+        <div class="metric-val">58.3%</div>
+        <div class="metric-label">Last 30 videos · Top 12% in niche</div>
+        <div class="metric-delta up">▲ +4.2pp vs last month</div>
+      </div>
+      <div class="chart-wrap" style="margin-top:12px">
+        <canvas id="retentionChart"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- RECENT VIDEOS + TRENDS -->
+  <div class="two-col">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">Recent Video Performance</div>
+        <div class="card-action">All videos →</div>
+      </div>
+      <div class="tabs">
+        <div class="tab active">Last 7 days</div>
+        <div class="tab">Last 30</div>
+        <div class="tab">All time</div>
+      </div>
+      <div class="video-list">
+        <div class="video-row">
+          <div class="thumb"><div class="thumb-overlay">AI📈</div></div>
+          <div>
+            <div class="video-title-cell">How I Use AI to Pick Dividend Stocks in 2026</div>
+            <div class="video-sub">Published 2d ago</div>
+          </div>
+          <div class="mono-cell">142.8K<div style="font-size:9px;color:var(--text-3)">views</div></div>
+          <div>
+            <div class="mono-cell" style="color:var(--green)">63%</div>
+            <div class="retention-bar"><div class="retention-fill" style="width:63%;background:var(--green)"></div></div>
+          </div>
+          <div class="mono-cell" style="color:var(--blue)">$1,840</div>
+        </div>
+        <div class="video-row">
+          <div class="thumb"><div class="thumb-overlay">FED🏦</div></div>
+          <div>
+            <div class="video-title-cell">Fed Rate Decision — What It Means for Your Portfolio</div>
+            <div class="video-sub">Published 4d ago</div>
+          </div>
+          <div class="mono-cell">89.2K<div style="font-size:9px;color:var(--text-3)">views</div></div>
+          <div>
+            <div class="mono-cell" style="color:var(--orange)">51%</div>
+            <div class="retention-bar"><div class="retention-fill" style="width:51%;background:var(--orange)"></div></div>
+          </div>
+          <div class="mono-cell" style="color:var(--blue)">$2,210</div>
+        </div>
+        <div class="video-row">
+          <div class="thumb"><div class="thumb-overlay">🤖💰</div></div>
+          <div>
+            <div class="video-title-cell">Claude vs GPT: Which AI Gives Better Stock Picks?</div>
+            <div class="video-sub">Published 6d ago</div>
+          </div>
+          <div class="mono-cell">201.4K<div style="font-size:9px;color:var(--text-3)">views</div></div>
+          <div>
+            <div class="mono-cell" style="color:var(--green)">71%</div>
+            <div class="retention-bar"><div class="retention-fill" style="width:71%;background:var(--green)"></div></div>
+          </div>
+          <div class="mono-cell" style="color:var(--blue)">$3,920</div>
+        </div>
+        <div class="video-row">
+          <div class="thumb"><div class="thumb-overlay">📊ETF</div></div>
+          <div>
+            <div class="video-title-cell">3 ETFs I'm Buying Every Month (AI + Finance Focus)</div>
+            <div class="video-sub">Published 7d ago</div>
+          </div>
+          <div class="mono-cell">67.1K<div style="font-size:9px;color:var(--text-3)">views</div></div>
+          <div>
+            <div class="mono-cell" style="color:var(--orange)">55%</div>
+            <div class="retention-bar"><div class="retention-fill" style="width:55%;background:var(--orange)"></div></div>
+          </div>
+          <div class="mono-cell" style="color:var(--blue)">$980</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">🔥 Trend Radar</div>
+        <div class="card-action">Full radar →</div>
+      </div>
+      <div class="trend-list">
+        <div class="trend-item">
+          <div class="trend-rank">#1</div>
+          <div>
+            <div class="trend-topic">Claude 4 Opus finance benchmarks</div>
+            <div class="trend-sub">AI · Search spike +340% · Breaking</div>
+          </div>
+          <div>
+            <div class="trend-score">91</div>
+            <div class="fire">🔥</div>
+          </div>
+        </div>
+        <div class="trend-item">
+          <div class="trend-rank">#2</div>
+          <div>
+            <div class="trend-topic">Fed hold — rate cut timeline shifting</div>
+            <div class="trend-sub">Finance · High RPM · Timely</div>
+          </div>
+          <div>
+            <div class="trend-score">84</div>
+            <div class="fire">🔥</div>
+          </div>
+        </div>
+        <div class="trend-item">
+          <div class="trend-rank">#3</div>
+          <div>
+            <div class="trend-topic">AI agents for passive income</div>
+            <div class="trend-sub">AI + Finance · Evergreen + trending</div>
+          </div>
+          <div>
+            <div class="trend-score">79</div>
+          </div>
+        </div>
+        <div class="trend-item">
+          <div class="trend-rank">#4</div>
+          <div>
+            <div class="trend-topic">NVDA earnings beat — AI infrastructure</div>
+            <div class="trend-sub">Finance · High intent · 24h window</div>
+          </div>
+          <div>
+            <div class="trend-score">76</div>
+          </div>
+        </div>
+        <div class="trend-item">
+          <div class="trend-rank">#5</div>
+          <div>
+            <div class="trend-topic">Robo-advisors vs AI copilots 2026</div>
+            <div class="trend-sub">AI + Finance · Gap in coverage</div>
+          </div>
+          <div>
+            <div class="trend-score">71</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- REVENUE + PIPELINE + CALENDAR -->
+  <div class="three-col">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">Revenue Breakdown</div>
+        <div class="card-action">Full desk →</div>
+      </div>
+      <div class="rev-grid">
+        <div class="rev-cell">
+          <div class="rev-label">AdSense</div>
+          <div class="rev-val">$6,840</div>
+          <div class="rev-delta up">▲ +18%</div>
+        </div>
+        <div class="rev-cell">
+          <div class="rev-label">Sponsorships</div>
+          <div class="rev-val">$7,500</div>
+          <div class="rev-delta up">▲ +31%</div>
+        </div>
+        <div class="rev-cell">
+          <div class="rev-label">Affiliates</div>
+          <div class="rev-val">$2,810</div>
+          <div class="rev-delta up">▲ +9%</div>
+        </div>
+        <div class="rev-cell">
+          <div class="rev-label">Memberships</div>
+          <div class="rev-val">$1,190</div>
+          <div class="rev-delta dn" style="color:var(--red)">▼ -3%</div>
+        </div>
+      </div>
+      <div style="margin-top:14px">
+        <div class="rev-label" style="margin-bottom:8px">Forecasted — July</div>
+        <div class="rev-val" style="font-size:26px;color:var(--green)">$22,400</div>
+        <div class="rev-delta" style="color:var(--text-3);font-family:var(--mono);font-size:10px">Based on current growth + 3 uploads/wk</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">Sponsorship Pipeline</div>
+        <div class="card-action">Open CRM →</div>
+      </div>
+      <div class="pipeline">
+        <div class="deal">
+          <div class="deal-dot" style="background:var(--green)"></div>
+          <div>
+            <div class="deal-name">TradingView Pro</div>
+            <div class="deal-stage">Contract Signed · Ships Jun 10</div>
+          </div>
+          <div class="deal-val">$4,500</div>
+        </div>
+        <div class="deal">
+          <div class="deal-dot" style="background:var(--blue)"></div>
+          <div>
+            <div class="deal-name">Composer.trade</div>
+            <div class="deal-stage">Negotiating · Counter sent</div>
+          </div>
+          <div class="deal-val">$3,000</div>
+        </div>
+        <div class="deal">
+          <div class="deal-dot" style="background:var(--orange)"></div>
+          <div>
+            <div class="deal-name">Wealthfront</div>
+            <div class="deal-stage">First contact · Awaiting brief</div>
+          </div>
+          <div class="deal-val">$6,000</div>
+        </div>
+        <div class="deal">
+          <div class="deal-dot" style="background:var(--purple)"></div>
+          <div>
+            <div class="deal-name">Koyfin Premium</div>
+            <div class="deal-stage">Inbound · Reviewing fit</div>
+          </div>
+          <div class="deal-val">$2,500</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">Content Calendar — June</div>
+        <div class="card-action">Full calendar →</div>
+      </div>
+      <div class="cal-grid">
+        <div class="cal-day-header">S</div>
+        <div class="cal-day-header">M</div>
+        <div class="cal-day-header">T</div>
+        <div class="cal-day-header">W</div>
+        <div class="cal-day-header">T</div>
+        <div class="cal-day-header">F</div>
+        <div class="cal-day-header">S</div>
+
+        <div class="cal-day" style="color:var(--text-3)"></div>
+        <div class="cal-day has-post">2<div class="dot" style="background:var(--green)"></div></div>
+        <div class="cal-day has-post">3<div class="dot" style="background:var(--green)"></div></div>
+        <div class="cal-day today">4<div class="dot" style="background:var(--blue)"></div></div>
+        <div class="cal-day">5</div>
+        <div class="cal-day has-post">6<div class="dot" style="background:var(--green)"></div></div>
+        <div class="cal-day">7</div>
+
+        <div class="cal-day">8</div>
+        <div class="cal-day scheduled">9<div class="dot" style="background:var(--purple)"></div></div>
+        <div class="cal-day has-post">10<div class="dot" style="background:var(--green)"></div></div>
+        <div class="cal-day">11</div>
+        <div class="cal-day scheduled">12<div class="dot" style="background:var(--purple)"></div></div>
+        <div class="cal-day">13</div>
+        <div class="cal-day">14</div>
+
+        <div class="cal-day">15</div>
+        <div class="cal-day scheduled">16<div class="dot" style="background:var(--purple)"></div></div>
+        <div class="cal-day">17</div>
+        <div class="cal-day scheduled">18<div class="dot" style="background:var(--purple)"></div></div>
+        <div class="cal-day">19</div>
+        <div class="cal-day scheduled">20<div class="dot" style="background:var(--purple)"></div></div>
+        <div class="cal-day">21</div>
+
+        <div class="cal-day">22</div>
+        <div class="cal-day">23</div>
+        <div class="cal-day scheduled">24<div class="dot" style="background:var(--purple)"></div></div>
+        <div class="cal-day">25</div>
+        <div class="cal-day">26</div>
+        <div class="cal-day scheduled">27<div class="dot" style="background:var(--purple)"></div></div>
+        <div class="cal-day">28</div>
+      </div>
+      <div style="display:flex;gap:12px;margin-top:12px;font-size:10px;color:var(--text-3)">
+        <span><span style="color:var(--green)">●</span> Published</span>
+        <span><span style="color:var(--purple)">●</span> Scheduled</span>
+        <span><span style="color:var(--blue)">●</span> Today</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- HOOK OPTIMIZER -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-title">🎯 Hook Optimizer — "Claude 4 Finance" video</div>
+      <div class="card-action">Regenerate →</div>
+    </div>
+    <div style="font-size:11px;color:var(--text-3);margin-bottom:12px">Ranked by predicted CTR · Click to use in Script Studio</div>
+    <div class="hook-list">
+      <div class="hook-row">
+        <div style="font-family:var(--mono);font-size:10px;color:var(--text-3);width:16px">#1</div>
+        <div class="hook-text">"I let Claude 4 manage my $50K portfolio for 30 days. Here's what happened."</div>
+        <div class="hook-bar"><div class="hook-fill" style="width:88%"></div></div>
+        <div class="hook-ctr" style="color:var(--green)">8.8%</div>
+      </div>
+      <div class="hook-row">
+        <div style="font-family:var(--mono);font-size:10px;color:var(--text-3);width:16px">#2</div>
+        <div class="hook-text">"Wall Street analysts are scared of this. Claude 4 just beat their 12-month returns."</div>
+        <div class="hook-bar"><div class="hook-fill" style="width:81%"></div></div>
+        <div class="hook-ctr" style="color:var(--blue)">8.1%</div>
+      </div>
+      <div class="hook-row">
+        <div style="font-family:var(--mono);font-size:10px;color:var(--text-3);width:16px">#3</div>
+        <div class="hook-text">"The AI finance tool I wish existed 5 years ago — a full breakdown."</div>
+        <div class="hook-bar"><div class="hook-fill" style="width:74%"></div></div>
+        <div class="hook-ctr" style="color:var(--text-2)">7.4%</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- COMPLIANCE GUARD -->
+  <div class="card" style="margin-bottom:8px">
+    <div class="card-header">
+      <div class="card-title">🛡 Compliance Guard — Last Draft</div>
+      <div class="card-action">View full report →</div>
+    </div>
+    <div class="guard-item ok">
+      <span class="icon">✓</span>
+      <span>Disclaimer present: "Not financial advice" stated at 0:14 and in description. Platform-compliant.</span>
+    </div>
+    <div class="guard-item warn">
+      <span class="icon">⚠</span>
+      <span>Claim at 4:32: "Claude 4 outperforms 95% of fund managers" — source this or soften to "in our test." Unverified superlatives can trigger demonetization.</span>
+    </div>
+    <div class="guard-item ok">
+      <span class="icon">✓</span>
+      <span>Sponsorship disclosure at start and end of video. FTC-compliant integration detected.</span>
+    </div>
+  </div>
+
+</main>
+
+<!-- ═══ RIGHT SIDEBAR ══════════════════════════════════════════════════ -->
+<aside class="right-sidebar">
+  <div class="sidebar-section">
+    <div class="sidebar-title">
+      <span class="live-dot"></span> Live Market Data
+    </div>
+    <div class="market-list">
+      <div class="market-row">
+        <div><div class="market-name">S&amp;P 500</div><div class="market-sub">SPY · US Equities</div></div>
+        <div><div class="market-price up">$591.42</div><div class="market-chg up">+1.24%</div></div>
+      </div>
+      <div class="market-row">
+        <div><div class="market-name">NASDAQ 100</div><div class="market-sub">QQQ · Tech</div></div>
+        <div><div class="market-price up">$512.88</div><div class="market-chg up">+1.83%</div></div>
+      </div>
+      <div class="market-row">
+        <div><div class="market-name">Bitcoin</div><div class="market-sub">BTC-USD · Crypto</div></div>
+        <div><div class="market-price up">$107,340</div><div class="market-chg up">+2.41%</div></div>
+      </div>
+      <div class="market-row">
+        <div><div class="market-name">NVIDIA</div><div class="market-sub">NVDA · AI Infra</div></div>
+        <div><div class="market-price up">$1,089</div><div class="market-chg up">+3.12%</div></div>
+      </div>
+      <div class="market-row">
+        <div><div class="market-name">Ethereum</div><div class="market-sub">ETH-USD · Crypto</div></div>
+        <div><div class="market-price dn">$3,918</div><div class="market-chg dn">-0.62%</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sidebar-section">
+    <div class="sidebar-title">⚡ Today's Stats</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+      <div style="padding:10px;background:var(--bg-panel);border-radius:8px;border:1px solid var(--border-dim)">
+        <div style="font-size:9px;color:var(--text-3);margin-bottom:4px">Views Today</div>
+        <div style="font-family:var(--mono);font-size:18px;font-weight:700;color:var(--text-1)">14.2K</div>
+        <div style="font-family:var(--mono);font-size:10px;color:var(--green)">▲ +8%</div>
+      </div>
+      <div style="padding:10px;background:var(--bg-panel);border-radius:8px;border:1px solid var(--border-dim)">
+        <div style="font-size:9px;color:var(--text-3);margin-bottom:4px">New Subs</div>
+        <div style="font-family:var(--mono);font-size:18px;font-weight:700;color:var(--text-1)">412</div>
+        <div style="font-family:var(--mono);font-size:10px;color:var(--green)">▲ +14%</div>
+      </div>
+      <div style="padding:10px;background:var(--bg-panel);border-radius:8px;border:1px solid var(--border-dim)">
+        <div style="font-size:9px;color:var(--text-3);margin-bottom:4px">Est. Revenue</div>
+        <div style="font-family:var(--mono);font-size:18px;font-weight:700;color:var(--blue)">$384</div>
+        <div style="font-family:var(--mono);font-size:10px;color:var(--text-3)">today</div>
+      </div>
+      <div style="padding:10px;background:var(--bg-panel);border-radius:8px;border:1px solid var(--border-dim)">
+        <div style="font-size:9px;color:var(--text-3);margin-bottom:4px">Avg RPM</div>
+        <div style="font-family:var(--mono);font-size:18px;font-weight:700;color:var(--text-1)">$27.2</div>
+        <div style="font-family:var(--mono);font-size:10px;color:var(--green)">▲ vs $22 avg</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="padding:12px 16px;border-bottom:1px solid var(--border)">
+    <div class="sidebar-title">📰 AI + Finance News</div>
+  </div>
+  <div class="news-feed">
+    <div class="news-item">
+      <div class="news-tag" style="color:var(--red)">🔴 BREAKING</div>
+      <div class="news-headline">Anthropic releases Claude 4 Opus with new finance-specific reasoning benchmark</div>
+      <div class="news-meta">Anthropic · 47 min ago</div>
+      <div class="news-score">🔥 Trend Score 91</div>
+    </div>
+    <div class="news-item">
+      <div class="news-tag" style="color:var(--orange)">📈 MARKETS</div>
+      <div class="news-headline">Fed minutes show rate cut now unlikely before Q4 — stagflation concern grows</div>
+      <div class="news-meta">Bloomberg · 1h 12m ago</div>
+      <div class="news-score">🔥 Trend Score 84</div>
+    </div>
+    <div class="news-item">
+      <div class="news-tag" style="color:var(--blue)">🤖 AI</div>
+      <div class="news-headline">OpenAI launches "Deep Research Finance" for ChatGPT Pro — direct competitor to existing tools</div>
+      <div class="news-meta">The Verge · 2h ago</div>
+      <div class="news-score" style="background:rgba(0,200,255,0.1);color:var(--blue)">⚡ Opp Score 79</div>
+    </div>
+    <div class="news-item">
+      <div class="news-tag" style="color:var(--green)">💰 REVENUE</div>
+      <div class="news-headline">YouTube increases finance ad rates heading into Q3 — CPMs up 18% YoY</div>
+      <div class="news-meta">AdAge · 3h ago</div>
+      <div class="news-score">💰 High RPM Alert</div>
+    </div>
+    <div class="news-item">
+      <div class="news-tag" style="color:var(--purple)">📊 DATA</div>
+      <div class="news-headline">NVDA beats earnings: $44B revenue, data center up 427% — AI infrastructure thesis validated</div>
+      <div class="news-meta">Reuters · 4h ago</div>
+      <div class="news-score">🔥 Trend Score 76</div>
+    </div>
+    <div class="news-item">
+      <div class="news-tag" style="color:var(--blue)">🤖 AI</div>
+      <div class="news-headline">Google DeepMind's AlphaFinance paper: AI outperforms quant hedge funds on Sharpe ratio</div>
+      <div class="news-meta">Nature · 5h ago</div>
+      <div class="news-score" style="background:rgba(0,200,255,0.1);color:var(--blue)">⚡ Opp Score 71</div>
+    </div>
+    <div class="news-item">
+      <div class="news-tag" style="color:var(--orange)">📈 MARKETS</div>
+      <div class="news-headline">Bitcoin ETF sees $2.3B inflows this week — institutional adoption accelerating</div>
+      <div class="news-meta">CoinDesk · 6h ago</div>
+      <div class="news-score">🔥 Trend Score 68</div>
+    </div>
+  </div>
+</aside>
+
+<script>
+  // Live clock
+  function updateClock() {
+    const now = new Date();
+    const days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+    const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    const h = now.getHours();
+    const m = String(now.getMinutes()).padStart(2,'0');
+    const ampm = h >= 12 ? 'PM' : 'AM';
+    const h12 = h % 12 || 12;
+    const el = document.getElementById('clock');
+    if (el) el.textContent = `${days[now.getDay()]} ${months[now.getMonth()]} ${String(now.getDate()).padStart(2,'0')}, 2026 — ${h12}:${m} ${ampm}`;
+  }
+  updateClock();
+  setInterval(updateClock, 30000);
+
+  // Chart defaults
+  Chart.defaults.color = '#3d5672';
+  Chart.defaults.font.family = "'JetBrains Mono', monospace";
+  Chart.defaults.font.size = 10;
+
+  // Optimization: Memoize CanvasGradient objects to avoid redundant allocations and color-stop processing
+  const gradBlueCache = new WeakMap();
+  const gradBlue = (ctx) => {
+    let g = gradBlueCache.get(ctx.chart.ctx);
+    if (!g) {
+      g = ctx.chart.ctx.createLinearGradient(0, 0, 0, 140);
+      g.addColorStop(0, 'rgba(0,200,255,0.25)');
+      g.addColorStop(1, 'rgba(0,200,255,0)');
+      gradBlueCache.set(ctx.chart.ctx, g);
+    }
+    return g;
+  };
+
+  const gradGreenCache = new WeakMap();
+  const gradGreen = (ctx) => {
+    let g = gradGreenCache.get(ctx.chart.ctx);
+    if (!g) {
+      g = ctx.chart.ctx.createLinearGradient(0, 0, 0, 140);
+      g.addColorStop(0, 'rgba(0,245,160,0.25)');
+      g.addColorStop(1, 'rgba(0,245,160,0)');
+      gradGreenCache.set(ctx.chart.ctx, g);
+    }
+    return g;
+  };
+
+  // Revenue chart
+  new Chart(document.getElementById('revenueChart'), {
+    type: 'line',
+    data: {
+      labels: ['Jan','Feb','Mar','Apr','May','Jun'],
+      datasets: [{
+        data: [8200, 10400, 11800, 13100, 15020, 18340],
+        borderColor: '#00c8ff',
+        borderWidth: 2,
+        fill: true,
+        backgroundColor: gradBlue,
+        tension: 0.4,
+        pointRadius: 0,
+        pointHoverRadius: 4,
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false }, tooltip: {
+        backgroundColor: '#111d30',
+        borderColor: '#1a2d45',
+        borderWidth: 1,
+        callbacks: { label: ctx => ' $' + ctx.raw.toLocaleString() }
+      }},
+      scales: {
+        x: { grid: { color: '#142035' }, border: { display: false }, ticks: { color: '#3d5672' } },
+        y: { grid: { color: '#142035' }, border: { display: false }, ticks: { color: '#3d5672', callback: v => '$' + (v/1000).toFixed(0) + 'K' } }
+      }
+    }
+  });
+
+  // Subscriber chart
+  new Chart(document.getElementById('subChart'), {
+    type: 'line',
+    data: {
+      labels: ['Jan','Feb','Mar','Apr','May','Jun'],
+      datasets: [{
+        data: [81200, 91400, 98800, 108100, 118650, 128400],
+        borderColor: '#00f5a0',
+        borderWidth: 2,
+        fill: true,
+        backgroundColor: gradGreen,
+        tension: 0.4,
+        pointRadius: 0,
+        pointHoverRadius: 4,
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false }, tooltip: {
+        backgroundColor: '#111d30',
+        borderColor: '#1a2d45',
+        borderWidth: 1,
+        callbacks: { label: ctx => ' ' + (ctx.raw/1000).toFixed(1) + 'K subs' }
+      }},
+      scales: {
+        x: { grid: { color: '#142035' }, border: { display: false }, ticks: { color: '#3d5672' } },
+        y: { grid: { color: '#142035' }, border: { display: false }, ticks: { color: '#3d5672', callback: v => (v/1000).toFixed(0) + 'K' } }
+      }
+    }
+  });
+
+  // Retention chart
+  new Chart(document.getElementById('retentionChart'), {
+    type: 'bar',
+    data: {
+      labels: ['V1','V2','V3','V4','V5','V6','V7','V8','V9','V10'],
+      datasets: [{
+        data: [52, 61, 58, 63, 49, 71, 55, 67, 58, 63],
+        backgroundColor: (ctx) => {
+          const v = ctx.raw;
+          if (v >= 65) return '#00f5a0';
+          if (v >= 55) return '#00c8ff';
+          return '#ff7c3a';
+        },
+        borderRadius: 4,
+        borderSkipped: false,
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false }, tooltip: {
+        backgroundColor: '#111d30',
+        borderColor: '#1a2d45',
+        borderWidth: 1,
+        callbacks: { label: ctx => ' ' + ctx.raw + '% retention' }
+      }},
+      scales: {
+        x: { grid: { display: false }, border: { display: false }, ticks: { color: '#3d5672' } },
+        y: { grid: { color: '#142035' }, border: { display: false }, ticks: { color: '#3d5672', callback: v => v + '%' }, min: 40, max: 80 }
+      }
+    }
+  });
+
+  // Ticker animation
+  const ticks = [
+    ['SPY', 591.42, 1.24], ['QQQ', 512.88, 1.83], ['BTC', 107340, 2.41],
+    ['ETH', 3918, -0.62], ['NVDA', 1089, 3.12], ['10Y', 4.32, -0.02],
+    ['VIX', 14.8, -0.9], ['DXY', 104.21, -0.31]
+  ];
+
+  // Optimization: Pre-instantiate formatters and cache DOM references
+  const fmtCurrency = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
+  const fmtDecimal = new Intl.NumberFormat('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  const fmtPercent = new Intl.NumberFormat('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2, signDisplay: 'always' });
+  const fiatAssets = new Set(['BTC', 'NVDA', 'SPY', 'QQQ', 'ETH']);
+
+  const strip = document.querySelector('.ticker-strip');
+  const tickElements = ticks.map(([sym]) => {
+    const tick = document.createElement('div');
+    tick.className = 'tick';
+    tick.innerHTML = `<span class="tick-label">${sym}</span><span class="tick-val"></span><span class=""></span>`;
+    strip.appendChild(tick);
+    return {
+      val: tick.querySelector('.tick-val'),
+      chg: tick.lastElementChild,
+      sym
+    };
+  });
+  // Clear initial static content if any
+  strip.innerHTML = '';
+  tickElements.forEach(el => strip.appendChild(el.val.parentElement));
+
+  const updateTicker = () => {
+    // Optimization: Update in-place to reduce GC pressure
+    for (let i = 0; i < ticks.length; i++) {
+      const row = ticks[i];
+      const price = row[1];
+      const chg = row[2];
+
+      const delta = (Math.random() - 0.49) * price * 0.001;
+      row[1] = Math.max(price + delta, 0.01);
+      row[2] = chg + (Math.random() - 0.5) * 0.05;
+
+      // Optimization: Direct DOM updates instead of innerHTML
+      const el = tickElements[i];
+      const newPrice = row[1];
+      const newChg = row[2];
+      const sym = row[0];
+
+      const priceText = fiatAssets.has(sym)
+        ? (newPrice > 1000 ? fmtCurrency.format(newPrice) : '$' + fmtDecimal.format(newPrice))
+        : (sym === '10Y' ? fmtDecimal.format(newPrice) + '%' : fmtDecimal.format(newPrice));
+
+      if (el.val.textContent !== priceText) el.val.textContent = priceText;
+
+      const chgText = sym === '10Y' ? fmtPercent.format(newChg).replace('+', '+').replace('-', '-') + 'bp' : fmtPercent.format(newChg) + '%';
+      if (el.chg.textContent !== chgText) el.chg.textContent = chgText;
+
+      const newDir = newChg >= 0 ? 'up' : 'dn';
+      if (el.chg.className !== newDir) el.chg.className = newDir;
+    }
+  };
+  updateTicker();
+  setInterval(updateTicker, 3000);
+</script>
+</body>
+</html>
