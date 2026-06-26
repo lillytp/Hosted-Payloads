@@ -1,0 +1,3 @@
+## 2026-06-26 - [Staggered Chart Initialization]
+**Learning:** Synchronous initialization of multiple Chart.js instances can block the main thread for over 500ms, leading to high Total Blocking Time (TBT). Using `requestAnimationFrame` to stagger initializations effectively breaks these into smaller tasks across separate frames, improving responsiveness. A recursive scheduling pattern is more maintainable than nesting callbacks and ensures each chart has its own frame budget.
+**Action:** Use `requestAnimationFrame` with a maintainable scheduling pattern to stagger heavy UI initializations on dashboard loads.
