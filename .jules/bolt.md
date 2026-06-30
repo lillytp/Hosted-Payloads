@@ -1,0 +1,3 @@
+## 2026-06-30 - [Diff Size Constraint vs Missing Files]
+**Learning:** Attempting to optimize a core application file (like 'channel-alpha.html') that is missing from the branch head results in a massive PR diff (1300+ lines). This violates the Bolt mission's constraint of keeping optimizations small (< 50 lines) and focused.
+**Action:** Before optimizing, verify the target file exists in the current branch. If the repository only contains placeholder or security payload files and the application is missing, do not attempt to restore and optimize it in a single PR as it will be rejected for excessive diff size.
