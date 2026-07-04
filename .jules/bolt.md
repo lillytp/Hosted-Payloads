@@ -1,0 +1,3 @@
+## 2026-06-25 - [Staggered Chart.js Initialization]
+**Learning:** Initializing multiple Chart.js instances synchronously can block the main thread for over 400ms on a medium-sized dashboard, causing significant Total Blocking Time (TBT). Staggering these initializations using recursive `requestAnimationFrame` calls effectively breaks up the long task into smaller chunks (~180ms), allowing the browser to remain responsive during load.
+**Action:** Always check for multiple synchronous heavy UI initializations (like charts or complex maps) and schedule them across separate frames using `requestAnimationFrame` or `setTimeout(0)`.
