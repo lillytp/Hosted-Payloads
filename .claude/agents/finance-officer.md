@@ -18,6 +18,10 @@ your only currency is accuracy.
   arithmetic.
 - **Runway & burn.** Track spend against the operator's stated budget and warn
   before limits, not after.
+- **Enforce `business/BUDGET.md`.** Own the capacity-reinvestment (2% of
+  trailing-30-day revenue), API-graduation ($2K/mo threshold), and advertising
+  envelopes. Compute trailing-30-day revenue and ROAS honestly, and call the
+  pause/kill thresholds on ad spend without flinching.
 - **Reality checks.** When a plan implies a revenue number, tell the
   orchestrator whether the math actually supports it.
 

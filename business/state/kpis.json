@@ -4,12 +4,22 @@
   "start_date": null,
   "day_index": 0,
   "revenue_usd_cumulative": 0.0,
+  "revenue_usd_trailing_30d": 0.0,
   "expenses_usd_cumulative": 0.0,
   "paying_customers": 0,
   "phase": "0-select",
   "business_chosen": null,
   "payment_path_ready": false,
+  "budget": {
+    "capacity_reinvest_pct": 2,
+    "api_graduation_threshold_monthly_usd": 2000,
+    "capacity_mode": "subscription",
+    "ad_budget_usd_standing_cap": 0,
+    "ad_spend_usd_cumulative": 0.0,
+    "ad_roas": null,
+    "offer_validated": false
+  },
   "status": "initialized",
-  "last_updated": "2026-07-23",
-  "notes": "Awaiting first daily check-in and opportunity-selection cycle."
+  "last_updated": "2026-07-24",
+  "notes": "Budget policy added (BUDGET.md): 2% capacity reinvestment, $2k/mo API graduation, ROAS-guarded ad envelope. Awaiting first daily check-in and opportunity selection."
 }

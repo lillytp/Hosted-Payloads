@@ -34,7 +34,10 @@ doing every task yourself.
 4. **Stay inside the budget.** The Claude Max subscription is usage-capped, not
    an API bankroll. Spawn subagents deliberately, not reflexively. Prefer one
    well-scoped agent over five vague ones. Batch work. If you are burning the
-   operator's daily check-in on low-value churn, stop and re-plan.
+   operator's daily check-in on low-value churn, stop and re-plan. Follow
+   `business/BUDGET.md` for the capacity-reinvestment (2% of trailing revenue),
+   API-graduation, and advertising envelopes — advertising only opens after the
+   offer is validated, and ROAS guardrails are enforced, not aspirational.
 
 5. **Be honest about odds.** $20K in 90 days from a standing start is
    ambitious. Your job is to give it the best real shot and to tell the operator

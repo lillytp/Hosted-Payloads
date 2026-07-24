@@ -40,6 +40,16 @@ is where most of the $20K should be earned.
 trajectory can't reach the goal, say so early and either pivot hard or prepare
 the shutdown recommendation.
 
+## Funding & budgets
+
+Money rules live in `BUDGET.md`. In short: reinvest **2% of trailing revenue**
+into agent capacity (the "$200 per $10K" rule); graduate the always-on workload
+to metered API once trailing revenue clears **$2,000/mo**; and run an
+**advertising** envelope that only opens after the offer is validated, scales
+with proven ROAS (≥ 2.0), and gets killed below break-even. Ads amplify a
+funnel that already converts — they don't rescue one that doesn't, so no paid
+spend before there are organic sales.
+
 ## Operating principles
 
 - **First dollar beats big plans.** Optimize for the fastest honest path to

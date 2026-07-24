@@ -11,6 +11,14 @@ something is gated, treat it as gated.
 - Setting or changing the price of anything that has live customers.
 - Any action touching the business bank account or payment processor.
 
+**Pre-authorized envelopes (see `BUDGET.md`).** Two categories are approved as
+policy so agents can operate within them without a fresh yes each time:
+capacity reinvestment (2% of trailing revenue) and advertising (revenue-linked,
+ROAS-guarded). Even inside these, the **operator executes the actual spend**
+(billing, payment details) and approves any increase to a standing cap. Agents
+plan and manage; they never touch payment instruments. Everything outside these
+two envelopes stays fully gated by the list above.
+
 ## Public / outward-facing
 - Publishing anything publicly (website going live, social post, listing,
   app-store submission, press).

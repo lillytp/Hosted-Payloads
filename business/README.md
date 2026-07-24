@@ -23,8 +23,10 @@ honest constraints shape everything here:
    entity; the agents will hand you a checklist for the rest (bank + Stripe).
 2. **The $200 plan is usage-capped.** Agents are spawned deliberately, not
    continuously. This is not a 24/7 always-on API service (that would cost
-   metered $/token and blow past $200 fast). We can graduate to that later if
-   revenue justifies it.
+   metered $/token and blow past $200 fast). Once revenue justifies it, we
+   graduate the background workload to metered API and reinvest a slice of
+   revenue into capacity — see `BUDGET.md` (the "$200 per $10K" rule and the
+   $2,000/mo graduation threshold).
 3. **$20K in 90 days is ambitious.** This system gives it a real, honest shot
    and tells you the truth about where it stands — including when to pivot or
    stop.
@@ -57,6 +59,7 @@ anything gets built.
 ## The files
 
 - `APPROVAL_GATES.md` — exactly what requires your yes before it happens.
+- `BUDGET.md` — money rules: capacity reinvestment, API graduation, ad budget.
 - `STRATEGY.md` — the 90-day plan and how the goal breaks down.
 - `LEDGER.md` — every real dollar in and out.
 - `DECISION_LOG.md` — append-only record of decisions.
