@@ -8,8 +8,8 @@
   "expenses_usd_cumulative": 0.0,
   "paying_customers": 0,
   "phase": "1-first-dollar",
-  "business_chosen": "AI automation services for SMBs. Lead sub-niche (2/3 + 3/3 category consensus): AI voice-receptionist / missed-call recovery for home-service trades (HVAC/plumbing/electrical), ~$1,500-2,500 setup + $400-700/mo retainer.",
-  "niche_selected_by": "3-agent independent vote, unanimous on category; 2/3 on the voice-receptionist sub-niche",
+  "business_chosen": "AI automation services for SMBs — bespoke cross-system integration & workflow automation for SMBs on fragmented/legacy stacks (home-service dispatch: ServiceTitan/Housecall Pro/FieldEdge; and e-commerce backend: Shopify/inventory/QuickBooks-Xero). AI voice/chat is a component, not the product. $1,500-10,000 setup + $400-2,000/mo retainer.",
+  "niche_selected_by": "Two independent 3-agent votes. Round 1: unanimous on category (AI automation services). Round 2 (post commoditization pressure-test): unanimous on the refined bespoke-integration offer; all three changed off the round-1 receptionist framing.",
   "payment_path_ready": false,
   "budget": {
     "capacity_reinvest_pct": 2,

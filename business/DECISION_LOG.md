@@ -131,3 +131,19 @@ Format:
   commodity receptionist — real friction against the 90-day cash goal.
 - Status: NO decision taken. Awaiting operator's call on repositioning per their
   instruction to wait for the verdict first.
+
+## 2026-07-24 — Round-2 re-vote confirms repositioning (unanimous)
+- Decision: Per the operator's majority-vote rule, a second independent 3-agent
+  vote (each given the pressure-test verdict) DECIDED the refined direction.
+  Result: unanimous (3/3), all three CHANGED off the round-1 receptionist pick →
+  bespoke cross-system integration & workflow automation for SMBs on fragmented/
+  legacy stacks; AI voice/chat demoted to a component/entry wedge. Initial
+  verticals: home-service dispatch integration + e-commerce backend integration.
+  Analyses: round2-agent-{1,2,3}.md. OPERATING_STRATEGY.md §1-2 finalized.
+- Made by: operator's pre-stated 3-agent majority-vote rule
+- Context: Operator asked to re-run the three agents with the pressure-test
+  results to see if the pick changed. It did — decisively.
+- Gated action approved: none. Building and all Phase 1 gated items (bank/Stripe,
+  account creation, outreach, paid tools) still await explicit operator go.
+- GTM guardrail recorded: bid named-platform integration terms, not the
+  saturated generic "AI" tag (round-2 evidence).

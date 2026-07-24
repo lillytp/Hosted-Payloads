@@ -1,17 +1,17 @@
 # Operating Strategy
 
-**Status:** the commoditization pressure-test has returned
-(`research/commoditization-pressure-test.md`). Verdict: the generic
-"receptionist, done-for-you" pitch is **not** durably defensible (it races
-vendors' own onboarding automation, ~0–18 months of runway); the durable wedge
-is **bespoke integration & cross-system workflow automation for SMBs on
+**Status:** positioning CONFIRMED by a second, evidence-informed independent vote
+(unanimous 3/3, all three changed off the round-1 receptionist framing) after the
+commoditization pressure-test (`research/commoditization-pressure-test.md`,
+`research/round2-agent-{1,2,3}.md`). The generic "receptionist, done-for-you"
+pitch is **not** durably defensible (~0–18 months of runway); the confirmed wedge
+is **bespoke cross-system integration & workflow automation for SMBs on
 fragmented/legacy software stacks** (2–5 year durability, because the constraint
-is the client's non-uniform software, which no vendor onboarding wizard can
-fix). **A repositioning to that wedge is RECOMMENDED but NOT yet decided —
-awaiting the operator's go.** Sections 1–2 below still describe the pre-verdict
-positioning and will be finalized once the operator decides. This document
-breaks the business into its three operating layers: **the orchestrator**, **the
-agents**, and **the human in the middle**.
+is the client's non-uniform software, which no vendor onboarding wizard can fix).
+Sections 1–2 reflect this confirmed positioning. Building/gated actions still
+await the operator's go. This document breaks the business into its three
+operating layers: **the orchestrator**, **the agents**, and **the human in the
+middle**.
 
 ---
 
@@ -41,15 +41,25 @@ and re-validate continuously (that's what the pressure-test is for).
 
 ---
 
-## 2. The offer & positioning
+## 2. The offer & positioning (confirmed by round-2 vote)
 
-- **Beachhead offer:** done-for-you AI missed-call/receptionist + lead-follow-up
-  automation, deeply integrated into one vertical's stack.
-- **Expansion:** once trust is established, broaden into bespoke back-office
-  automation for the same client (intake, scheduling, follow-up, reporting) —
-  the higher-margin, harder-to-commoditize work.
-- **Target verticals (highest missed-call ROI + reachable):** law firms,
-  dental/medical/med-spa, restoration, multi-truck home-service operators.
+- **Core offer (the durable engine):** bespoke cross-system integration &
+  workflow automation for SMBs on fragmented/legacy stacks — making their CRM,
+  dispatch, scheduling, intake, invoicing, and accounting actually talk to each
+  other. Sold as *"make your systems work together,"* not "AI receptionist."
+- **AI voice/chat is a component, not the headline.** A receptionist/intake bot
+  can be one node in the build, never the product.
+- **Entry wedge for fast cash (weeks 1–3):** take simple, quick automation/CRM
+  setup gigs for early revenue and reviews — but frame even these in integration
+  language so the portfolio matches the durable wedge from day one.
+- **Initial verticals (run in parallel to widen the early-bid pool):**
+  1. **Home-service dispatch integration** — ServiceTitan / Housecall Pro /
+     FieldEdge / spreadsheets (all three agents).
+  2. **E-commerce backend integration** — Shopify ↔ inventory ↔ QuickBooks/Xero
+     (agent 3; faster, no phone/TCPA compliance risk, +130% YoY demand).
+- **Go-to-market note:** bid on *named-platform* terms (e.g. "ServiceTitan
+  integration"), not the saturated generic "AI" tag (round-2 finding: generic AI
+  category reply rate ~7.2%, at/below platform mean).
 - **Price:** $1,500–$10,000 setup + $400–$2,000/mo retainer. Fewer, higher-value
   accounts over high-volume cheap ones (see `STRATEGY.md`).
 
