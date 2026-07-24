@@ -147,3 +147,35 @@ Format:
   account creation, outreach, paid tools) still await explicit operator go.
 - GTM guardrail recorded: bid named-platform integration terms, not the
   saturated generic "AI" tag (round-2 evidence).
+
+## 2026-07-24 — MATERIAL NEW CONTEXT: operator has ~20 yrs cybersecurity expertise
+- Note: All prior analyses assumed a "generalist operator with no domain
+  expertise / no audience." That assumption is now void. The operator has ~20
+  years of cybersecurity experience and a likely industry network. This was
+  repeatedly flagged as the single factor that could re-rank everything.
+
+## 2026-07-24 — Reseller/advisory model stress-test (FINDING, not yet a decision)
+- Finding: The "AI-services RESELLER" framing does NOT survive — (1) frontier
+  vendor partner programs are structurally closed to a solo operator (Anthropic
+  Partner Network needs 10+ certified practitioners; OpenAI has no public
+  affiliate), and SaaS affiliate commissions ($10-150/mo) are too small for
+  $20K/90d; (2) taking vendor commissions while claiming "independent vetting"
+  is the exact conflict-of-interest that Gartner (no vendor revenue) and NAPFA
+  fee-only advisors exist to avoid, and a solo has no scale to dilute it like
+  GuidePoint ($194.5M rev, 800+ vendor panel).
+- It DOES survive, reshaped, as a FEE-ONLY AI risk & procurement advisory
+  practice: charge customers directly, zero vendor commissions. Demand evidenced
+  (Verizon DBIR 2026: 858,440 GenAI-upload DLP events / shadow AI; IAPP Jan 2026
+  names advisory a recognized AI-governance category; 70%+ orgs use third-party
+  AI). Fastest 90-day cash: fixed-fee "AI Tool Risk & Procurement Review"
+  ($2,500-5,000, 1-2 wk, sold through the operator's warm network) — NOT
+  commissions (18+ mo barrier), NOT cold outreach (6-9 mo cyber sales cycle).
+  Durability HIGH (trust in a credentialed person), but sell judgment not
+  questionnaires (GRC tools commoditize the checklist layer). Caveat: EU AI Act
+  high-risk deadline deferred to Dec 2027, softening regulatory urgency.
+- Assessment: given the operator's real background, this advisory model is
+  arguably a BETTER fit than the currently-selected bespoke-integration
+  direction — it sells against 20 yrs of standing where $2,500-20,000
+  engagements are normal. Analysis: research/reseller-model-stress-test.md.
+- Status: NO decision taken. This is a candidate PIVOT for the operator to
+  decide explicitly (not covered by the earlier 3-agent vote rule).
