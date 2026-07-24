@@ -179,3 +179,24 @@ Format:
   engagements are normal. Analysis: research/reseller-model-stress-test.md.
 - Status: NO decision taken. This is a candidate PIVOT for the operator to
   decide explicitly (not covered by the earlier 3-agent vote rule).
+
+## 2026-07-24 — OBJECTIVE RESET: autonomy is primary; profit bar if full-time
+- Operator constraint (material, overrides prior framing):
+  1. AUTONOMY IS NON-NEGOTIABLE. The business must run with minimal operator
+     involvement. A model that requires the operator's personal billable time
+     (i.e., the fee-only advisory practice) is a JOB, not the autonomous
+     business we set out to build — REJECTED on that basis.
+  2. If a model DOES require the operator to go full-time (quit the day job),
+     it must clear ~$800K–$1,000,000 ANNUAL PROFIT to be worth it.
+- Implications recorded:
+  - The advisory pivot fails both tests: it needs the operator, and a solo
+    advisory practice cannot reach $800K-1M profit (that requires a staffed
+    firm = more involvement + capital, still not autonomous).
+  - Target reshapes toward a LEVERAGED / PRODUCTIZED business where revenue
+    scales without the operator's time-per-unit; the 20-yr cyber expertise is
+    the MOAT baked into the product, not the billable input.
+  - Honest expectation: $800K-1M profit is a multi-year outcome, not a year-1
+    result on a $200/mo bootstrap; quitting the day job should be gated on a
+    PROVEN run-rate, not hope. The $20K/90-day test remains the near-term
+    proof-of-life milestone.
+- Status: NO decision taken. Awaiting operator's choice of target model.
