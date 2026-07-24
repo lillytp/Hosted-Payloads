@@ -101,3 +101,15 @@ Format:
 - Gated action approved: none. Phase 1 gated items (bank/Stripe, marketplace
   account creation, outreach sending, any paid voice-infra signup) still require
   explicit operator approval. 90-day clock not started until go-to-market begins.
+
+## 2026-07-24 — Positioning refined to "Option B" + operating strategy written
+- Decision: Position the business as a done-for-you, integration-heavy AI
+  automation SERVICE (not a product; we will not out-build funded receptionist
+  startups), with missed-call/receptionist as a beachhead and bespoke back-office
+  automation as the harder-to-commoditize expansion. Ran a commoditization
+  pressure-test (market-analyst) to validate the wedge before committing. Wrote
+  business/OPERATING_STRATEGY.md breaking out orchestrator/agents/human roles.
+- Made by: operator (chose "C first, then B" and requested the full strategy)
+- Context: Operator challenged whether we can compete with existing AI
+  receptionists; agreed we compete on service/integration/reachability, not tech.
+- Gated action approved: none (strategy/research only).

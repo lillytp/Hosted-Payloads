@@ -68,6 +68,7 @@ anything gets built.
 - `GOVERNANCE.md` — agents can't touch their own source; code changes need a human.
 - `RUNBOOK.md` — topology diagram and how to start the orchestrator on a laptop.
 - `STRATEGY.md` — the 90-day plan and how the goal breaks down.
+- `OPERATING_STRATEGY.md` — full strategy + what the orchestrator/agents/human each do.
 - `LEDGER.md` — every real dollar in and out.
 - `DECISION_LOG.md` — append-only record of decisions.
 - `DAILY_BRIEF_TEMPLATE.md` — the shape of each day's report.
