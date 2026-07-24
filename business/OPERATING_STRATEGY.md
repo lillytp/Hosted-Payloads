@@ -1,9 +1,17 @@
 # Operating Strategy
 
-**Status:** provisional — positioning per "Option B" (bespoke, integration-heavy
-automation). Subject to revision when `research/commoditization-pressure-test.md`
-returns a verdict. This document breaks the business into its three operating
-layers: **the orchestrator**, **the agents**, and **the human in the middle**.
+**Status:** the commoditization pressure-test has returned
+(`research/commoditization-pressure-test.md`). Verdict: the generic
+"receptionist, done-for-you" pitch is **not** durably defensible (it races
+vendors' own onboarding automation, ~0–18 months of runway); the durable wedge
+is **bespoke integration & cross-system workflow automation for SMBs on
+fragmented/legacy software stacks** (2–5 year durability, because the constraint
+is the client's non-uniform software, which no vendor onboarding wizard can
+fix). **A repositioning to that wedge is RECOMMENDED but NOT yet decided —
+awaiting the operator's go.** Sections 1–2 below still describe the pre-verdict
+positioning and will be finalized once the operator decides. This document
+breaks the business into its three operating layers: **the orchestrator**, **the
+agents**, and **the human in the middle**.
 
 ---
 

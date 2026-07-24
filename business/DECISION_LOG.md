@@ -113,3 +113,21 @@ Format:
 - Context: Operator challenged whether we can compete with existing AI
   receptionists; agreed we compete on service/integration/reachability, not tech.
 - Gated action approved: none (strategy/research only).
+
+## 2026-07-24 — Commoditization pressure-test verdict (FINDING, not yet a decision)
+- Finding: Generic "AI receptionist, done-for-you" ($1,500–10K setup) is NOT
+  durably defensible — self-serve vendors already ship the features and are
+  automating away the "we set it up for you" value (~0–18 mo runway). Durable
+  wedge = bespoke integration & cross-system workflow automation for SMBs on
+  fragmented/legacy stacks (ServiceTitan, Housecall Pro, FieldEdge, spreadsheets);
+  2–5 yr durability because the constraint is the client's non-uniform software.
+  Implementation gap is real (Goldman Sachs 10,000 Small Businesses survey,
+  n=1,256, Jan–Feb 2026: 76% of SMBs use AI, only 14% embedded across core ops)
+  but closing fast at the shallow layer, slowly at the deep layer.
+- Note: this favors agent 1's original framing over the 2/3 receptionist
+  sub-niche; the honest read is the majority vote picked the less defensible
+  flavor. Category (AI automation services) still validated.
+- Tension: the defensible bespoke version is slower/harder to sell than the
+  commodity receptionist — real friction against the 90-day cash goal.
+- Status: NO decision taken. Awaiting operator's call on repositioning per their
+  instruction to wait for the verdict first.
