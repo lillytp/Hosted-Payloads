@@ -1,0 +1,10 @@
+{
+  "_comment": "NON-SENSITIVE public company info only. Copy to company.json and fill. company.json is git-ignored. NEVER put EIN, bank/account numbers, tax IDs, or passwords here — see business/SECURITY.md.",
+  "legal_name": "",
+  "public_brand_name": "",
+  "tagline": "",
+  "public_email": "",
+  "website_url": "",
+  "jurisdiction": "",
+  "entity_type": ""
+}

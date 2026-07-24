@@ -53,3 +53,18 @@ Format:
   publishing still gated per action. NOT blanket-approved: any AI-synthesized
   likeness of the operator (per-use approval, disclosed, non-deceptive) and any
   hiring (per-decision approval — real person, payment, legal).
+
+## 2026-07-24 — Added agents; set secrets policy
+- Decision: Add `accountant`, `sales`, and `business-development` agents;
+  clarified `growth-marketer` is the marketing agent. Established a secrets
+  policy: banking/company secrets are never pasted into chat and never
+  committed. Added `SECURITY.md`, `.gitignore`, `.env.example`, and
+  `company.example.json`.
+- Made by: operator (requested agents + secure storage)
+- Context: Operator offered to provide banking/company info and required it be
+  stored securely, off the public internet, and not shared with Claude.
+- Key point recorded: Claude processes everything typed in chat, so the
+  banking info must NOT be sent here. Agents don't need it — the operator
+  executes all money movement. Secrets live in the operator's own secret store.
+- Gated action approved: no new spend. Non-sensitive public company info may go
+  in `company.json` (git-ignored); nothing sensitive in repo or chat.

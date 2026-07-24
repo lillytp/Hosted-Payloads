@@ -1,0 +1,19 @@
+# Secrets — NEVER commit. See business/SECURITY.md.
+.env
+.env.*
+!.env.example
+secrets/
+business/secrets/
+*.key
+*.pem
+*.p12
+*.pfx
+credentials*.json
+!*.example.json
+service-account*.json
+business/state/company.json
+
+# Local / OS
+.DS_Store
+*.local
+*.log

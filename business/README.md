@@ -51,9 +51,12 @@ anything gets built.
 | `orchestrator` | General manager. Plans, delegates, enforces gates, reports daily. |
 | `market-analyst` | Opportunity research, demand validation, pricing. |
 | `product-builder` | Builds the actual sellable asset. |
-| `growth-marketer` | Positioning, copy, channels; drafts (publishing is gated). |
+| `growth-marketer` | The marketing agent: positioning, copy, channels (incl. social); drafts (publishing is gated). |
+| `sales` | Pipeline from lead to paid; drafts outreach/closing (sending is gated). |
+| `business-development` | Partnerships, affiliates, channels, deals (outreach/commitments gated). |
 | `customer-support` | Drafts customer replies and help docs (sending is gated). |
-| `finance-officer` | Honest books, unit economics, runway. |
+| `finance-officer` | Forward-looking: unit economics, runway, enforces the budget. |
+| `accountant` | Backward-looking: clean books, categorization, tax set-aside. No banking creds. |
 | `qa-reviewer` | Independent quality/policy check before anything reaches you. |
 
 ## The files
@@ -61,6 +64,7 @@ anything gets built.
 - `APPROVAL_GATES.md` — exactly what requires your yes before it happens.
 - `BUDGET.md` — money rules: reinvestment, API graduation, ad budget, staffing.
 - `BRAND_MEDIA_POLICY.md` — social media, and use of the operator's voice/image.
+- `SECURITY.md` — secrets policy: what never goes in the repo or the chat.
 - `STRATEGY.md` — the 90-day plan and how the goal breaks down.
 - `LEDGER.md` — every real dollar in and out.
 - `DECISION_LOG.md` — append-only record of decisions.

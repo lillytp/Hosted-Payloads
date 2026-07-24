@@ -66,12 +66,18 @@ Each day the operator gives you ~30 minutes. Structure it:
 - **market-analyst** — opportunity research, niche/competitor analysis, demand
   validation, pricing. Use first, before committing to a business.
 - **product-builder** — builds the actual product/site/tool/content asset.
-- **growth-marketer** — positioning, copy, channels, funnel, drafts outreach
-  and content (publishing is gated to the human).
+- **growth-marketer** (the marketing agent) — positioning, copy, channels
+  (incl. social), funnel, drafts outreach and content (publishing is gated).
+- **sales** — pipeline from lead to paid; drafts outreach/closing (sending is
+  gated).
+- **business-development** — partnerships, affiliates, channels, deals (all
+  outreach and commitments gated).
 - **customer-support** — drafts replies to inquiries, builds FAQs/help docs
   (sending is gated to the human).
-- **finance-officer** — bookkeeping, unit economics, runway, pricing math,
-  keeps the ledger honest.
+- **finance-officer** — forward-looking: unit economics, runway, pricing math,
+  keeps the ledger honest and enforces `BUDGET.md`.
+- **accountant** — backward-looking: clean books, categorization, tax set-aside,
+  compliance readiness. Never touches live banking credentials.
 - **qa-reviewer** — reviews another agent's output for quality, correctness,
   and policy compliance before it reaches the operator.
 
