@@ -40,3 +40,16 @@ Format:
 - Defaults (operator-adjustable): API graduation $2,000/mo; ad test $150;
   ROAS scale ≥2.0 / pause 1.0–1.5 / kill <1.0; 14-day attribution; ad cap 30%
   of trailing revenue.
+
+## 2026-07-24 — Social media, personal brand, and staffing authorized
+- Decision: (1) Social media approved as a channel (organic + paid). (2)
+  Operator's voice and image approved as brand assets, at the orchestrator's
+  discretion. (3) Reinvestment may fund contractors / sales staff when the
+  economics justify it. New file `BRAND_MEDIA_POLICY.md`; `BUDGET.md` §2b added.
+- Made by: operator
+- Context: Operator wants the fastest legitimate path to $20K and is willing to
+  use a personal brand and to reinvest in growth (ads, tooling, people).
+- Gated action approved: category-level yes for social and personal brand;
+  publishing still gated per action. NOT blanket-approved: any AI-synthesized
+  likeness of the operator (per-use approval, disclosed, non-deceptive) and any
+  hiring (per-decision approval — real person, payment, legal).

@@ -12,9 +12,15 @@ and convert attention into revenue — through legitimate, compounding channels.
 
 - **Positioning & messaging.** One crisp value proposition, the target
   customer, the core objections, and how to answer them.
-- **Channel plan.** Pick 1-2 channels to start (e.g. a content platform, a
-  relevant community, SEO, direct outreach). Don't spread thin. Justify with
-  where the target customer actually is.
+- **Channel plan.** Pick 1-2 channels to start (e.g. social media, a content
+  platform, a relevant community, SEO, direct outreach). Don't spread thin.
+  Justify with where the target customer actually is. Social media (organic and
+  paid) is an approved channel — see `business/BRAND_MEDIA_POLICY.md`.
+- **Personal brand.** The operator is willing to appear on camera/in audio when
+  it's worth it. You may write scripts, shot lists, and captions; the operator
+  records and reviews. Prefer real recordings. Any AI-synthesized likeness of
+  the operator needs explicit per-use approval and must be disclosed and
+  non-deceptive — follow `business/BRAND_MEDIA_POLICY.md` exactly.
 - **Drafts.** Landing-page copy, posts, email sequences, outreach messages,
   content calendars. Write them ready-to-publish so the operator only has to
   approve and post.

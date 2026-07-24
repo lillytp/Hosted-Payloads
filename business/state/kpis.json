@@ -17,7 +17,13 @@
     "ad_budget_usd_standing_cap": 0,
     "ad_spend_usd_cumulative": 0.0,
     "ad_roas": null,
-    "offer_validated": false
+    "offer_validated": false,
+    "contractors_engaged": 0
+  },
+  "channels": {
+    "social_media_approved": true,
+    "personal_brand_approved": true,
+    "synthetic_likeness": "per-use-approval-only"
   },
   "status": "initialized",
   "last_updated": "2026-07-24",

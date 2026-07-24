@@ -59,7 +59,8 @@ anything gets built.
 ## The files
 
 - `APPROVAL_GATES.md` — exactly what requires your yes before it happens.
-- `BUDGET.md` — money rules: capacity reinvestment, API graduation, ad budget.
+- `BUDGET.md` — money rules: reinvestment, API graduation, ad budget, staffing.
+- `BRAND_MEDIA_POLICY.md` — social media, and use of the operator's voice/image.
 - `STRATEGY.md` — the 90-day plan and how the goal breaks down.
 - `LEDGER.md` — every real dollar in and out.
 - `DECISION_LOG.md` — append-only record of decisions.

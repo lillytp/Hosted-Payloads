@@ -30,6 +30,16 @@ two envelopes stays fully gated by the list above.
 - Anything with legal or tax consequences (entity changes, contracts, terms of
   service, privacy policy going live, tax filings).
 - Agreeing to any obligation on the operator's behalf.
+- **Hiring or engaging any person** (contractor, sales staff, freelancer) —
+  real person + payment + legal. Agent drafts the role/scope/comp; operator
+  hires, contracts, and pays. See `BUDGET.md` §2b.
+
+## Brand / likeness
+- **Publishing on social media** or any platform (still gated like all
+  publishing).
+- **Any AI-synthesized use of the operator's voice or image** — approved
+  per-use only, never by blanket permission, and must be disclosed and
+  non-deceptive. See `BRAND_MEDIA_POLICY.md`.
 
 ## Data / access
 - Connecting a new external service or granting it access.
