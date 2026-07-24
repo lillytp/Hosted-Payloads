@@ -1,0 +1,15 @@
+{
+  "goal_usd": 20000,
+  "window_days": 90,
+  "start_date": null,
+  "day_index": 0,
+  "revenue_usd_cumulative": 0.0,
+  "expenses_usd_cumulative": 0.0,
+  "paying_customers": 0,
+  "phase": "0-select",
+  "business_chosen": null,
+  "payment_path_ready": false,
+  "status": "initialized",
+  "last_updated": "2026-07-23",
+  "notes": "Awaiting first daily check-in and opportunity-selection cycle."
+}
