@@ -87,3 +87,17 @@ Format:
 - Made by: operator
 - Context: System fully specified; first real work begins.
 - Gated action approved: no (research only; no spend, no publishing).
+
+## 2026-07-24 — Niche selected by 3-agent independent vote
+- Decision: NICHE = AI automation services for SMBs. Per operator's rule ("if
+  two of three independent agents agree, that's the pick"), the vote decided it.
+  Result: unanimous (3/3) on the AI-automation category; 2/3 (agents 2 & 3)
+  independently converged on the sub-niche: done-for-you AI voice-receptionist /
+  missed-call recovery for home-service trades (HVAC/plumbing/electrical),
+  ~$1,500-2,500 setup + $400-700/mo retainer. Analyses: vote-agent-{1,2,3}.md.
+- Made by: operator's pre-stated decision rule (3-agent majority vote)
+- Context: Operator asked to spin up three independent research agents and adopt
+  the niche any two agreed on.
+- Gated action approved: none. Phase 1 gated items (bank/Stripe, marketplace
+  account creation, outreach sending, any paid voice-infra signup) still require
+  explicit operator approval. 90-day clock not started until go-to-market begins.

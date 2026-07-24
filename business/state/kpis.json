@@ -7,8 +7,9 @@
   "revenue_usd_trailing_30d": 0.0,
   "expenses_usd_cumulative": 0.0,
   "paying_customers": 0,
-  "phase": "0-select",
-  "business_chosen": null,
+  "phase": "1-first-dollar",
+  "business_chosen": "AI automation services for SMBs. Lead sub-niche (2/3 + 3/3 category consensus): AI voice-receptionist / missed-call recovery for home-service trades (HVAC/plumbing/electrical), ~$1,500-2,500 setup + $400-700/mo retainer.",
+  "niche_selected_by": "3-agent independent vote, unanimous on category; 2/3 on the voice-receptionist sub-niche",
   "payment_path_ready": false,
   "budget": {
     "capacity_reinvest_pct": 2,
@@ -25,7 +26,7 @@
     "personal_brand_approved": true,
     "synthetic_likeness": "per-use-approval-only"
   },
-  "status": "initialized",
+  "status": "phase-1-selected-awaiting-operator-go",
   "last_updated": "2026-07-24",
-  "notes": "Budget policy added (BUDGET.md): 2% capacity reinvestment, $2k/mo API graduation, ROAS-guarded ad envelope. Awaiting first daily check-in and opportunity selection."
+  "notes": "Niche chosen by 3-agent independent vote (unanimous: AI automation services; 2/3 on voice-receptionist for home-service trades). Phase 1 pending operator go + human-only unblockers (bank/Stripe, marketplace accounts). start_date still null until go-to-market actually begins."
 }
