@@ -68,3 +68,22 @@ Format:
   executes all money movement. Secrets live in the operator's own secret store.
 - Gated action approved: no new spend. Non-sensitive public company info may go
   in `company.json` (git-ignored); nothing sensitive in repo or chat.
+
+## 2026-07-24 — Governance: no self-modification + code-change approval
+- Decision: Agents have no access to their own source; all code changes are
+  human-reviewed and human-applied. Added `GOVERNANCE.md`, `RUNBOOK.md`
+  (topology + laptop run instructions), and `.claude/settings.json` deny rules
+  blocking Read/Edit/Write on `.claude/**`, `CLAUDE.md`, config, and secrets.
+- Made by: operator
+- Context: Operator required that at run the agents never access source code and
+  that any code change be human-approved.
+- Note: "orchestrator spins up agents" = delegate to / parallelize the existing
+  roster; authoring a NEW agent type is a code change requiring human approval.
+- Gated action approved: n/a (governance/config only).
+
+## 2026-07-24 — Opportunity-selection cycle kicked off
+- Decision: Start Phase 0 — delegate to market-analyst for a validated shortlist
+  of 3-5 business options fitting the constraints.
+- Made by: operator
+- Context: System fully specified; first real work begins.
+- Gated action approved: no (research only; no spend, no publishing).

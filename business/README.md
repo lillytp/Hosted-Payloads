@@ -65,6 +65,8 @@ anything gets built.
 - `BUDGET.md` — money rules: reinvestment, API graduation, ad budget, staffing.
 - `BRAND_MEDIA_POLICY.md` — social media, and use of the operator's voice/image.
 - `SECURITY.md` — secrets policy: what never goes in the repo or the chat.
+- `GOVERNANCE.md` — agents can't touch their own source; code changes need a human.
+- `RUNBOOK.md` — topology diagram and how to start the orchestrator on a laptop.
 - `STRATEGY.md` — the 90-day plan and how the goal breaks down.
 - `LEDGER.md` — every real dollar in and out.
 - `DECISION_LOG.md` — append-only record of decisions.

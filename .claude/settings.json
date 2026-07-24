@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "deny": [
+      "Read(./.claude/**)",
+      "Edit(./.claude/**)",
+      "Write(./.claude/**)",
+      "Read(./CLAUDE.md)",
+      "Edit(./CLAUDE.md)",
+      "Write(./CLAUDE.md)",
+      "Edit(./.gitignore)",
+      "Write(./.gitignore)",
+      "Read(./.env)",
+      "Read(./secrets/**)",
+      "Read(./business/secrets/**)",
+      "Read(./business/state/company.json)"
+    ]
+  }
+}
